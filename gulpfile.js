@@ -8,6 +8,7 @@ var sourcemaps = require('gulp-sourcemaps')
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var imgmin = require('gulp-imagemin');
+var uglify = require('gulp-uglify');
 
 
 // 🥤🥤🥤🥤🥤🥤🥤🥤
@@ -21,6 +22,10 @@ gulp.task('htmlification',function(){
 // pour js 
 gulp.task('jsification',function(){
    return gulp.src('dev/js/*.js')
+   .pipe(uglify(),)
+   .pipe(rename(function (path) {
+      path.basename += ".min";
+   }))
    .pipe(gulp.dest('prod/js'));
 })
 // pour img 
@@ -52,8 +57,6 @@ gulp.task('browser-sync', function() {
       }
    });
 });
-
-
 
 // 🥤🥤🥤🥤🥤🥤🥤🥤🥤🥤🥤🥤🥤
 // 3. Executions des taches
